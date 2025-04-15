@@ -1,9 +1,8 @@
-langchain
-openai
-chainlit
-chromadb
-tiktoken
-PyPDF2
-pypdf
-pandas
-tabulate
+chainlit==2.5.5
+langchain==0.3.23
+langchain_community==0.3.21
+langchain_huggingface==0.1.2
+langchain_ollama==0.3.1
+langchain_openai==0.3.12
+openai==1.74.0
+python-dotenv==1.1.0
