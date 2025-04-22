@@ -1,27 +1,69 @@
-# INICIALIZACION
-Para iniciar la aplicación es necesario usar docker, ollama y ejecutar el siguiente comando en CMD:
+# GUIA DE INSTALACIÓN Y USO
+
+## INICIALIZACION
+Para inicializar la aplicación, es necesario usar ollama, y preferiblemente, desde WSL o directamente Linux, para aprovechar la GPU de NVIDIA, ya que desde windows no se permite.
+
+para configurar wsl, debemos escribir el siguiente comando en una terminal Windows:
 ```cmd
-docker run -d -p 11434:11434 --name ollama_container ollama/ollama:latest
+wsl --install
 ```
-esto es para lanzar un contenedor con una imagen de ollama
-luego al ejecutar la linea 
+
+Luego debemos descargar una distribución Ubuntu:
 ```cmd
-docker ps
+wsl --install -d Ubuntu
 ```
-debería verse la información del contenedor correspondiente:
+
+Y entraremos a ella mediante el comando:
 ```cmd
-CONTAINER ID   IMAGE                  COMMAND               CREATED         STATUS         PORTS                      NAMES
-26199d50e848   ollama/ollama:latest   "/bin/ollama serve"   5 minutes ago   Up 5 minutes   0.0.0.0:11434->11434/tcp   ollama_container
+wsl -d Ubuntu
 ```
-si luego al ejecutar el siguiente comando en la **consola de comandos de docker**:
+
+Después, instalaremos Ollama en nuestra distribución Ubuntu:
 ```cmd
-ollama list
+curl -fsSL https://ollama.com/install.sh | sh
 ```
-no se ve nada, debemos ejecutar:
+
+Y escribiremos el siguiente comando para correr el modelo de lenguaje, en nuestro caso Mistral, que estará disponible en el puerto 11434 porque lo ejecutamos desde Ollama:
 ```cmd
-ollama pull mistral 
+ollama run mistral
 ```
-para descargar el modelo de lenguaje
+
+## GPU
+Si queremos usar la GPU para acelerar tremendamente el tiempo de respuesta del modelo de lenguaje, debemos instalar el kit de desarollador de Nvidia, el cual se puede descargar desde el siguiente enlace:
+https://developer.nvidia.com/cuda-downloads
+
+si todo funciona correctamente, deberíamos poder usar el siguiente comando, aún en la distribución Ubuntu:
+```cmd
+nvidia-smi
+```
+
+para poder visualizar los procesos que usan la GPU. Una vez tengamos Ollama corriendo en nuestra distribución Ubuntu, podemos abrir una nueva terminal, entrar en la distribución Ubuntu, y comprobar que se está ejecutando Ollama. Debería aparecer algo así:
+```cmd
+nvidia-smi
+Tue Apr 22 19:07:41 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.04             Driver Version: 572.61         CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4060        On  |   00000000:01:00.0  On |                  N/A |
+|  0%   41C    P2            N/A  /  115W |    6840MiB /   8188MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A              25      G   /Xwayland                             N/A      |
+|    0   N/A  N/A              36      G   /Xwayland                             N/A      |
+|    0   N/A  N/A            1189      C   /ollama                               N/A      |
++-----------------------------------------------------------------------------------------+
+```
+
 
 posteriormente ejecutar en la carpeta del proyecto:
 ```cmd
@@ -29,10 +71,10 @@ pip install ./requirements.txt -r
 ```
 para instalar todas las librerias necesarias.
 
-# EMBEDDINGS
+## EMBEDDINGS
 
 Antes de usar el chat por primera vez, es importante crear los embeddings a partir de los documentos a usar.
-Para ello, debemos insertar los documentos que necesitemos en la carpeta ./pdf los documentos que necesitemos en formato PDF obligatoriamente
+Para ello, debemos insertar los documentos que necesitemos en la carpeta ./pdf los documentos que necesitemos en formato PDF obligatoriamente.
 
 Una vez se hayan registrado estos documentos, es necesario convertirlos a embeddings a través del comando:
 ```cmd
@@ -42,15 +84,16 @@ estando situado en la carpeta del proyecto.
 
 Cuando se ejecuta este comando, se crea una carpeta llamada **faiss_index** que contiene 2 archivos, **index.faiss** e **index.pkl**.
 
-# CHAT RAG
+Si ya existen estos archivos, es porque ya se han creado los embeddings anteriormente.
 
-Para usar la aplicación del chat de RAG, debemos asegurarnos haber completado todas las instalaciones anteriores, abrir la aplicación de **Ollama**, ejecutar la imagen de ollama en **Docker** y ejecutar el comando 
+## CHAT RAG
+
+Para usar la aplicación del chat de RAG, debemos asegurarnos haber completado todas las instalaciones anteriores, abrir la distribución de Ubuntu de wsl y ejecutar el siguiente comando desde la misma:
 ```cmd
 ollama run mistral
 ```
-en la **consola de comandos de Docker**.
 
-Para lanzar el chat de chainlit al navegador, se requiere el siguiente comando.
+Para lanzar el chat de chainlit al navegador, se requiere el siguiente comando en la carpeta del proyecto.
 ```cmd
 chainlit run ./app.py -w
 ```
