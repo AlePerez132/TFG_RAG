@@ -28,6 +28,12 @@ Y escribiremos el siguiente comando para correr el modelo de lenguaje, en nuestr
 ollama run mistral
 ```
 
+Posteriormente ejecutar en la carpeta del proyecto:
+```cmd
+pip install ./requirements.txt -r
+```
+para instalar todas las librerias necesarias.
+
 ## GPU
 Si queremos usar la GPU para acelerar tremendamente el tiempo de respuesta del modelo de lenguaje, debemos instalar el kit de desarollador de Nvidia, el cual se puede descargar desde el siguiente enlace:
 https://developer.nvidia.com/cuda-downloads
@@ -63,13 +69,6 @@ Tue Apr 22 19:07:41 2025
 |    0   N/A  N/A            1189      C   /ollama                               N/A      |
 +-----------------------------------------------------------------------------------------+
 ```
-
-
-posteriormente ejecutar en la carpeta del proyecto:
-```cmd
-pip install ./requirements.txt -r
-```
-para instalar todas las librerias necesarias.
 
 ## EMBEDDINGS
 
