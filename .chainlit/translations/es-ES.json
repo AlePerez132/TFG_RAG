@@ -1,0 +1,215 @@
+{
+    "common": {
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "continue": "Continuar",
+        "goBack": "Atrás",
+        "reset": "Restablecer",
+        "submit": "Enviar"
+      },
+      "status": {
+        "loading": "Cargando...",
+        "error": {
+          "default": "Ha ocurrido un error",
+          "serverConnection": "No se pudo alcanzar el servidor"
+        }
+      }
+    },
+    "auth": {
+      "login": {
+        "title": "Iniciar sesión para acceder a la aplicación",
+        "form": {
+          "email": {
+            "label": "Dirección de correo electrónico",
+            "required": "El correo electrónico es un campo requerido"
+          },
+          "password": {
+            "label": "Contraseña",
+            "required": "La contraseña es un campo requerido"
+          },
+          "actions": {
+            "signin": "Iniciar sesión"
+          },
+          "alternativeText": {
+            "or": "O"
+          }
+        },
+        "errors": {
+          "default": "No es posible iniciar sesión",
+          "signin": "Intenta iniciar sesión con una cuenta diferente",
+          "oauthSignin": "Intenta iniciar sesión con una cuenta diferente",
+          "redirectUriMismatch": "La URI de redirección no coincide con la configuración de la aplicación OAuth",
+          "oauthCallback": "Intenta iniciar sesión con una cuenta diferente",
+          "oauthCreateAccount": "Intenta iniciar sesión con una cuenta diferente",
+          "emailCreateAccount": "Intenta iniciar sesión con una cuenta diferente",
+          "callback": "Intenta iniciar sesión con una cuenta diferente",
+          "oauthAccountNotLinked": "Para confirmar tu identidad, inicia sesión con la misma cuenta que usaste originalmente",
+          "emailSignin": "No se pudo enviar el correo electrónico",
+          "emailVerify": "Por favor verifica tu correo. Se ha enviado un nuevo correo",
+          "credentialsSignin": "Error al iniciar sesión. Verifica que los datos ingresados sean correctos",
+          "sessionRequired": "Por favor inicia sesión para acceder a esta página"
+        }
+      },
+      "provider": {
+        "continue": "Continuar con {{provider}}"
+      }
+    },
+    "chat": {
+      "input": {
+        "placeholder": "Escriba su consulta aquí...",
+        "actions": {
+          "send": "Enviar mensaje",
+          "stop": "Parar tarea",
+          "attachFiles": "Adjuntar archivo"
+        }
+      },
+      "speech": {
+        "start": "Iniciar grabación",
+        "stop": "Parar grabación",
+        "connecting": "Conectando"
+      },
+      "fileUpload": {
+        "dragDrop": "Arrastra y suelta archivos aquí",
+        "browse": "Buscar archivos",
+        "sizeLimit": "Límite:",
+        "errors": {
+          "failed": "Error al subir",
+          "cancelled": "Subida cancelada de"
+        }
+      },
+      "messages": {
+        "status": {
+          "using": "Usando",
+          "used": "Usado"
+        },
+        "actions": {
+          "copy": {
+            "button": "Copiar al portapapeles",
+            "success": "¡Copiado!"
+          }
+        },
+        "feedback": {
+          "positive": "Útil",
+          "negative": "No útil",
+          "edit": "Editar comentario",
+          "dialog": {
+            "title": "Añadir un comentario",
+            "submit": "Enviar comentario"
+          },
+          "status": {
+            "updating": "Actualizando",
+            "updated": "Comentario actualizado"
+          }
+        }
+      },
+      "history": {
+        "title": "Últimos mensajes",
+        "empty": "Vacío...",
+        "show": "Mostrar historial"
+      },
+      "settings": {
+        "title": "Panel de configuración"
+      },
+      "watermark": "Desarrollado con"
+    },
+    "threadHistory": {
+      "sidebar": {
+        "title": "Chats anteriores",
+        "filters": {
+          "search": "Buscar",
+          "placeholder": "Buscar conversaciones..."
+        },
+        "timeframes": {
+          "today": "Hoy",
+          "yesterday": "Ayer",
+          "previous7days": "Últimos 7 días",
+          "previous30days": "Últimos 30 días"
+        },
+        "empty": "No se encontraron conversaciones",
+        "actions": {
+          "close": "Cerrar barra lateral",
+          "open": "Abrir barra lateral"
+        }
+      },
+      "thread": {
+        "untitled": "Conversación sin título",
+        "menu": {
+          "rename": "Renombrar",
+          "delete": "Eliminar"
+        },
+        "actions": {
+          "delete": {
+            "title": "Confirmar eliminación",
+            "description": "Esto eliminará la conversación junto con sus mensajes y elementos. Esta acción no se puede deshacer",
+            "success": "Chat eliminado",
+            "inProgress": "Eliminando chat"
+          },
+          "rename": {
+            "title": "Renombrar conversación",
+            "description": "Introduce un nuevo nombre para esta conversación",
+            "form": {
+              "name": {
+                "label": "Nombre",
+                "placeholder": "Introduce nuevo nombre"
+              }
+            },
+            "success": "¡Conversación renombrada!",
+            "inProgress": "Renombrando conversación"
+          }
+        }
+      }
+    },
+    "navigation": {
+      "header": {
+        "chat": "Chat",
+        "readme": "README",
+        "light": "Tema claro",
+        "theme": {
+          "dark": "Tema oscuro",
+          "system": "Seguir sistema"
+        }
+      },
+      "newChat": {
+        "button": "Nuevo chat",
+        "dialog": {
+          "title": "Crear nuevo chat",
+          "description": "Esto borrará tu historial de chat actual. ¿Seguro que deseas continuar?",
+          "tooltip": "Nuevo chat"
+        }
+      },
+      "user": {
+        "menu": {
+          "settings": "Configuración",
+          "settingsKey": "C",
+          "apiKeys": "Claves API",
+          "logout": "Cerrar sesión"
+        }
+      }
+    },
+    "apiKeys": {
+      "title": "Claves API requeridas",
+      "description": "Para usar esta aplicación, se requieren las siguientes claves API. Las claves se almacenan en el almacenamiento local de tu dispositivo.",
+      "success": {
+        "saved": "Guardado exitosamente"
+      }
+    },
+    "alerts": {
+      "info": "Información",
+      "note": "Nota",
+      "tip": "Consejo",
+      "important": "Importante",
+      "warning": "Advertencia",
+      "caution": "Precaución",
+      "debug": "Depuración",
+      "example": "Ejemplo",
+      "success": "Éxito",
+      "help": "Ayuda",
+      "idea": "Idea",
+      "pending": "Pendiente",
+      "security": "Seguridad",
+      "beta": "Beta",
+      "best-practice": "Mejor práctica"
+    }
+  }
+  
