@@ -8,9 +8,6 @@ from langchain_community.vectorstores import FAISS
 
 import chainlit as cl
 from typing import cast
-from dotenv import load_dotenv
-
-load_dotenv()
 
 from transformers import AutoTokenizer, AutoModel
 import torch
@@ -26,11 +23,17 @@ retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 4})
 # Prompt adaptado a RAG + historial
 prompt_template = ChatPromptTemplate.from_messages([
     ("system", 
-        "Eres un asistente de IA que responde correctamente y en español. "
-        "Si no sabes la respuesta, di 'No tengo información sobre su pregunta'. "
-        "Usa la siguiente información relevante para responder la pregunta:\n\n{context}"),
+        "Eres un asistente experto en temas médicos que responde siempre en español. "
+        "Debes usar únicamente la información proporcionada en el contexto para responder. "
+        "NO menciones artículos, fuentes, documentos ni autores. "
+        "NO digas frases como 'el objetivo de este artículo' o 'según el documento'. "
+        "No digas frases como 'dentro del contexto proporcionado."
+        "Responde de forma directa, como si el conocimiento fuera tuyo. "
+        "Si no tienes información suficiente en el contexto, responde: 'No tengo información sobre su pregunta'.\n\n"
+        "Contexto:\n{context}"),
     ("human", "{history}\nUsuario: {query}")
 ])
+
 
 @cl.on_chat_start
 async def on_chat_start():
