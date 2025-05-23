@@ -1,3 +1,4 @@
+"""
 from langchain_ollama import ChatOllama
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
@@ -12,6 +13,7 @@ from typing import cast
 from transformers import AutoTokenizer, AutoModel
 import torch
 
+
 # Configurar embeddings y vector store
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
@@ -23,17 +25,11 @@ retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 4})
 # Prompt adaptado a RAG + historial
 prompt_template = ChatPromptTemplate.from_messages([
     ("system", 
-        "Eres un asistente experto en temas médicos que responde siempre en español. "
-        "Debes usar únicamente la información proporcionada en el contexto para responder. "
-        "NO menciones artículos, fuentes, documentos ni autores. "
-        "NO digas frases como 'el objetivo de este artículo' o 'según el documento'. "
-        "No digas frases como 'dentro del contexto proporcionado."
-        "Responde de forma directa, como si el conocimiento fuera tuyo. "
-        "Si no tienes información suficiente en el contexto, responde: 'No tengo información sobre su pregunta'.\n\n"
-        "Contexto:\n{context}"),
+        "Eres un asistente de IA que responde correctamente y en español. "
+        "Si no sabes la respuesta, di 'No tengo información sobre su pregunta'. "
+        "Usa la siguiente información relevante para responder la pregunta:\n\n{context}"),
     ("human", "{history}\nUsuario: {query}")
 ])
-
 
 @cl.on_chat_start
 async def on_chat_start():
@@ -88,3 +84,55 @@ async def on_message(message: cl.Message):
     history.append({"role": "assistant", "content": response_text})
     cl.user_session.set("history", history)
     
+    """
+from def_clase import RAG
+import chainlit as cl
+from langchain.schema.runnable.config import RunnableConfig
+
+rag=RAG()
+
+rag.load_retriever()
+
+@cl.on_chat_start
+async def on_chat_start():
+    rag.chat_start_chainlit()
+
+@cl.on_message
+async def on_message(message: cl.Message):
+    runnable = rag.runnable
+
+    # Recuperar y actualizar el historial
+    history = cl.user_session.get("history", [])
+
+    # Formatear el historial (sin incluir la última entrada del usuario, que se pasará como query)
+    history_str = "\n".join(
+        [f"{'Usuario' if m['role']=='user' else 'Asistente'}: {m['content']}" for m in history]
+    )
+
+    #Este código formatea el historial de la siguiente forma:
+    #   Usuario: ¿Qué es la fotosíntesis?
+    #   Asistente: La fotosíntesis es un proceso mediante el cual...
+    #Recorriendo la lista de mensajes y determinando si pertenecen al usuario o al asistente.
+
+    # Recuperar documentos relevantes
+    query = message.content
+    docs = rag.retriever.invoke(query)
+    relevant_doc = "\n\n".join([doc.page_content for doc in docs])
+
+    # Generar respuesta con streaming y capturar el texto completo
+    msg = cl.Message(content="")
+    response_text = ""
+
+    async for chunk in runnable.astream(
+        {"query": query, "relevant_doc": relevant_doc, "history": history_str},
+        config=RunnableConfig(callbacks=[cl.LangchainCallbackHandler()]),
+    ):
+        response_text += chunk
+        await msg.stream_token(chunk)
+    await msg.send()
+
+    # Guardamos la entrada del usuario en el historial
+    history.append({"role": "user", "content": message.content})
+    # Guardar la respuesta del asistente en el historial
+    history.append({"role": "assistant", "content": response_text})
+    cl.user_session.set("history", history)

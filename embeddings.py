@@ -1,7 +1,5 @@
-import os
-
+"""
 from langchain_huggingface import HuggingFaceEmbeddings
-
 
 dir="./pdf"
 
@@ -28,3 +26,10 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-
 from langchain_community.vectorstores import FAISS
 db = FAISS.from_texts(texts, embeddings)
 db.save_local("faiss_index")
+"""
+
+from def_clase import RAG
+
+rag=RAG()
+
+rag.generate_embeddings()
