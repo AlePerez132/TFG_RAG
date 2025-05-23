@@ -8,12 +8,13 @@ loader = DirectoryLoader(
 )
 docs = loader.load()
 
+contenido = ""
+for doc in docs:
+    contenido += doc.page_content
+
+print("EN BRUTO")
+print(contenido)
+
 rag=RAG()
 
-print("\nEN BRUTO:\n")
-print(docs[0].page_content)
-
-texto_limpio=rag.limpiar_texto_pubmed(docs[0].page_content.__str__)
-
-print("\nPROCESADO:\n")
-print(texto_limpio)
+print(rag.optimizar_texto_estudio(contenido))
