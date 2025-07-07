@@ -1,5 +1,6 @@
 # GUIA DE INSTALACIÓN Y USO
-![Diagrama](Diagrama aplicación TFG RAG.jpg)
+
+![Diagrama](TFG_RAG/Diagrama aplicación TFG RAG.jpg)
 ## INICIALIZACION
 Para inicializar la aplicación, es necesario usar ollama, y preferiblemente, desde WSL o directamente Linux, para aprovechar la GPU de NVIDIA, ya que desde windows no se permite.
 
