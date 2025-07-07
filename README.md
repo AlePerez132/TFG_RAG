@@ -1,6 +1,6 @@
 # DIAGRAMA Y USO DE LA APLICACIÓN
 ![Diagrama aplicación TFG RAG](https://github.com/user-attachments/assets/80e6f9ef-0d0b-4ab9-a745-bc4e1d54d701)
-![Video de Demo](https://github.com/user-attachments/assets/98102517-0b1a-4034-9e60-6ae463602fb5)
+[![Video de Demo](https://github.com/user-attachments/assets/627338d8-b049-41d2-9df5-d61a37fe3fbc)](https://github.com/user-attachments/assets/98102517-0b1a-4034-9e60-6ae463602fb5)
 
 # GUIA DE INSTALACIÓN
 ## INICIALIZACION
